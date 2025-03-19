@@ -1,0 +1,31 @@
+Table Pojazd {
+  ID int [primary key]
+  Nazwa varchar(50)
+  Model varchar(50)
+  Status varchar(20) // np. aktywny, w naprawie
+}
+
+Table Czesc {
+  ID int [primary key]
+  Nazwa varchar(50)
+  Typ varchar(30) // np. silnik, serwo, bateria
+  Cena decimal(10,2)
+  Link varchar(255)
+  Pojazd_ID int [ref: > Pojazd.ID]
+}
+
+Table Czujnik {
+  ID int [primary key]
+  Typ varchar(30) // np. lidar, kamera, ultradźwiękowy
+  Wartosc float // np. odległość, prędkość
+  Czas_pomiaru datetime
+  Pojazd_ID int [ref: > Pojazd.ID]
+}
+
+Table Zdarzenie {
+  ID int [primary key]
+  Typ varchar(50) // np. awaria silnika, błąd czujnika
+  Opis text
+  Czas datetime
+  Pojazd_ID int [ref: > Pojazd.ID]
+}
