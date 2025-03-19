@@ -1,4 +1,5 @@
 Wstępny opis działania:
+
 -Pojazd powinien w jak najszybszym czasie pokonać założoną drogę, omijając możliwe przeszkody,
 
 -Pojazd posiada 3 tryby jazdy w zależności od odległości występowania przeszkód,
