@@ -1,0 +1,37 @@
+Table Uzytkownik {
+  ID int [primary key]
+  Imie varchar(50)
+  Nazwisko varchar(50)
+  Email varchar(100)
+}
+
+Table Pojazd {
+  ID int [primary key]
+  Nazwa varchar(50)
+  Model varchar(50)
+  Status varchar(20)
+  Uzytkownik_ID int [ref: > Uzytkownik.ID]
+}
+
+Table Zdarzenie {
+  ID int [primary key]
+  Typ varchar(50)
+  Opis text
+  Czas datetime
+  Pojazd_ID int [ref: > Pojazd.ID]
+}
+
+Table Stan_Baterii {
+  ID int [primary key]
+  Poziom int
+  Napięcie float
+  Czas_pomiaru datetime
+  Pojazd_ID int [ref: > Pojazd.ID]
+}
+
+Table Przejazdy {
+  ID int [primary key]
+  Data datetime
+  Liczba_przejazdow int
+  Pojazd_ID int [ref: > Pojazd.ID]
+}
