@@ -1,0 +1,61 @@
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Float, Text, Enum
+from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+class Uzytkownik(Base):
+    __tablename__ = 'uzytkownik'
+    
+    id = Column(Integer, primary_key=True)
+    imie = Column(String(50), nullable=False)
+    nazwisko = Column(String(50), nullable=False)
+    email = Column(String(100), unique=True, nullable=False)
+    
+    pojazdy = relationship("Pojazd", back_populates="uzytkownik")
+
+class Pojazd(Base):
+    __tablename__ = 'pojazd'
+    
+    id = Column(Integer, primary_key=True)
+    nazwa = Column(String(50), nullable=False)
+    model = Column(String(50), nullable=False)
+    status = Column(Enum("aktywny", "nieaktywny", "serwis", name="status_enum"), nullable=False)
+    uzytkownik_id = Column(Integer, ForeignKey('uzytkownik.id'))
+    
+    uzytkownik = relationship("Uzytkownik", back_populates="pojazdy")
+    zdarzenia = relationship("Zdarzenie", back_populates="pojazd")
+    stan_baterii = relationship("StanBaterii", back_populates="pojazd")
+    przejazdy = relationship("Przejazdy", back_populates="pojazd")
+
+class Zdarzenie(Base):
+    __tablename__ = 'zdarzenie'
+    
+    id = Column(Integer, primary_key=True)
+    typ = Column(String(50), nullable=False)
+    opis = Column(Text, nullable=True)
+    czas = Column(DateTime, nullable=False)
+    pojazd_id = Column(Integer, ForeignKey('pojazd.id'))
+    
+    pojazd = relationship("Pojazd", back_populates="zdarzenia")
+
+class StanBaterii(Base):
+    __tablename__ = 'stan_baterii'
+    
+    id = Column(Integer, primary_key=True)
+    poziom = Column(Integer, nullable=False)
+    napiecie = Column(Float, nullable=False)
+    czas_pomiaru = Column(DateTime, nullable=False)
+    pojazd_id = Column(Integer, ForeignKey('pojazd.id'))
+    
+    pojazd = relationship("Pojazd", back_populates="stan_baterii")
+
+class Przejazdy(Base):
+    __tablename__ = 'przejazdy'
+    
+    id = Column(Integer, primary_key=True)
+    data = Column(DateTime, nullable=False)
+    liczba_przejazdow = Column(Integer, nullable=False)
+    pojazd_id = Column(Integer, ForeignKey('pojazd.id'))
+    
+    pojazd = relationship("Pojazd", back_populates="przejazdy")
