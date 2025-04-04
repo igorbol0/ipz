@@ -1,12 +1,12 @@
 CREATE TABLE `Uzytkownik` (
-  `ID` int PRIMARY KEY,
+  `ID` int AUTO_INCREMENT PRIMARY KEY,
   `Imie` varchar(50),
   `Nazwisko` varchar(50),
   `Email` varchar(100)
 );
 
 CREATE TABLE `Pojazd` (
-  `ID` int PRIMARY KEY,
+  `ID` int AUTO_INCREMENT PRIMARY KEY,
   `Nazwa` varchar(50),
   `Model` varchar(50),
   `Status` varchar(20),
@@ -14,7 +14,7 @@ CREATE TABLE `Pojazd` (
 );
 
 CREATE TABLE `Zdarzenie` (
-  `ID` int PRIMARY KEY,
+  `ID` int AUTO_INCREMENT PRIMARY KEY,
   `Typ` varchar(50),
   `Opis` text,
   `Czas` datetime,
@@ -22,7 +22,7 @@ CREATE TABLE `Zdarzenie` (
 );
 
 CREATE TABLE `Stan_Baterii` (
-  `ID` int PRIMARY KEY,
+  `ID` int AUTO_INCREMENT PRIMARY KEY,
   `Poziom` int,
   `Napięcie` float,
   `Czas_pomiaru` datetime,
@@ -30,7 +30,7 @@ CREATE TABLE `Stan_Baterii` (
 );
 
 CREATE TABLE `Przejazdy` (
-  `ID` int PRIMARY KEY,
+  `ID` int AUTO_INCREMENT PRIMARY KEY,
   `Data` datetime,
   `Liczba_przejazdow` int,
   `Pojazd_ID` int
